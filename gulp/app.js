@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     browserify = require('browserify'),
     rev = require('gulp-rev'),
-    buffer = require('gulp-buffer')
+    buffer = require('gulp-buffer'),
+    revReplace = require('gulp-rev-replace')
 
 gulp.task('app', [], function() {
 	return browserify('client/index.js')
@@ -11,6 +12,16 @@ gulp.task('app', [], function() {
           .pipe(buffer())
           .pipe(rev())
 	  .pipe(gulp.dest('public'))
+          .pipe(rev.manifest())
+          .pipe(gulp.dest('public'))
 })
 
-gulp.task('default', ['app'])
+gulp.task('revreplace', ['app'], function() {
+  var manifest = gulp.src('./public/rev-manifest.json')
+
+  return gulp.src('./client/index.html')
+    .pipe(revReplace({manifest: manifest}))
+    .pipe(gulp.dest('public'))
+})
+
+gulp.task('default', ['revreplace'])
