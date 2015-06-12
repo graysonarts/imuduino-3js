@@ -11,6 +11,8 @@
   "dependencies": {
     "browserify": "^10.2.4",
     "express": "^4.12.4",
+    "lodash": "^3.9.3",
+    "noble": "^1.0.1",
     "socket.io": "^1.3.5"
   },
   "devDependencies": {
