@@ -32,8 +32,8 @@ function render() {
 var socket = io.connect()
 socket.on('position', function (data) {
   pitch = data.pitch
-  yaw = data.yaw
-  roll = data.roll
+  yaw = -data.yaw
+  roll = -data.roll
 })
 
 render()
