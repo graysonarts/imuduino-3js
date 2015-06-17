@@ -20,7 +20,9 @@ It's basic, but probably good enough.  More testing is needed to know for sure.
 ### Position Data
 
 packet length = 20 bytes
+
 packet type byte = 'P'
+
 data:
 
 * acceleration x *int16*
@@ -36,7 +38,9 @@ data:
 ### Atmosphere Data
 
 packet length = 6 bytes
+
 packet type byte = 'A'
+
 data:
 
 * temperature *int16*
