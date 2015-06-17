@@ -5,10 +5,10 @@ var gulp = require('gulp'),
     buffer = require('gulp-buffer'),
     revReplace = require('gulp-rev-replace')
 
-gulp.task('app', [], function() {
-	return browserify('client/index.js')
+gulp.task('pyr-app', [], function() {
+	return browserify('client/pyr.js')
 	  .bundle()
-	  .pipe(source('app.js'))
+	  .pipe(source('pyr.js'))
           .pipe(buffer())
           .pipe(rev())
 	  .pipe(gulp.dest('public'))
@@ -16,10 +16,10 @@ gulp.task('app', [], function() {
           .pipe(gulp.dest('public'))
 })
 
-gulp.task('revreplace', ['app'], function() {
+gulp.task('revreplace', ['pyr-app'], function() {
   var manifest = gulp.src('./public/rev-manifest.json')
 
-  return gulp.src('./client/index.html')
+  return gulp.src('./client/*.html')
     .pipe(revReplace({manifest: manifest}))
     .pipe(gulp.dest('public'))
 })

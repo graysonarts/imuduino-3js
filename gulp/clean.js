@@ -3,9 +3,7 @@ var gulp = require('gulp'),
 
 gulp.task('clean', [], function(cb) {
   del([
-      'public/app-*.js',
-      'public/rev-manifest.json',
-      'public/index.html'
+      'public'
   ], cb)
 })
 

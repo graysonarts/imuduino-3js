@@ -1,13 +1,29 @@
 <html>
 	<head>
-		<title>My first Three.js app</title>
+		<title>IMUduino examples</title>
 		<style>
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
 		</style>
 	</head>
 	<body>
-          <script src="/socket.io/socket.io.js"></script>
-          <script src="app.js"></script>
+          <h1>IMUduino examples</h1>
+          <p>Here are a bunch of examples of using the IMUduino with javascript
+          to give you a taste of what you can do with this device</p>
+          <p>Each section below is associated with a specific sketch, either from
+          the official IMUduino github, or from my sketches folder.  A link will
+          be provided for each section.</p>
+          <p>To use a sample, load the appropriate sketch, run 
+          <strong>npm config set imuduino-3js:type [name of section]</strong>, restart the server, and then click on
+          the link for the sample.</p>
+          <h2>IMUduino_Bluetooth_UART_YawPitchRoll</h2>
+          <p>These use the
+          <a href="https://github.com/zrecommerce/imuduino-btle/tree/master/Arduino/libraries/IMUduino/examples/IMUduino_Bluetooth_UART_YawPitchRoll">IMUduino_Bluetooth_UART_YawPitchRoll</a>
+          sketch from the official IMUduino repo</p>
+          <dl>
+            <dt><a href="pyr.html">Pitch-Yaw-Roll cube</a></dt>
+            <dd>This is a very simple setup that allows you to control the rotation
+            of a cube by rotating the IMUduino</dd>
+          </dl>
 	</body>
 </html>
