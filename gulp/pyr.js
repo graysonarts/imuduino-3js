@@ -12,16 +12,14 @@ gulp.task('pyr-app', [], function() {
           .pipe(buffer())
           .pipe(rev())
 	  .pipe(gulp.dest('public'))
-          .pipe(rev.manifest())
+          .pipe(rev.manifest('pyr-manifest.json'))
           .pipe(gulp.dest('public'))
 })
 
-gulp.task('revreplace', ['pyr-app'], function() {
-  var manifest = gulp.src('./public/rev-manifest.json')
+gulp.task('pyr', ['pyr-app'], function() {
+  var manifest = gulp.src('./public/pyr-manifest.json')
 
-  return gulp.src('./client/*.html')
+  return gulp.src('./client/pyr.html')
     .pipe(revReplace({manifest: manifest}))
     .pipe(gulp.dest('public'))
 })
-
-gulp.task('default', ['revreplace'])
