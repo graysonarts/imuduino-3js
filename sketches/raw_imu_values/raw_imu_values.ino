@@ -87,7 +87,6 @@ void loop() {
   if (status == ACI_EVT_CONNECTED) {
     
     my3IMU.getRawValues(raw_values);
-
     
     // Our btleWrite() method handles spliting chars into 20-byte chunks
     btleWriteRawValues();
@@ -146,12 +145,9 @@ void writePacket(byte packet_type, int* data, byte len) {
   crc = 0;
   sendbuffer[0] = packet_type;
   for(i = 0; i< len; i++) {
-    Serial.println(i*2+1);
     crc ^= sendbuffer[i*2+1] = lowByte(data[i]);
-    Serial.println(i*2+2);
     crc ^= sendbuffer[i*2+2] = highByte(data[i]);
   }
-  Serial.println(i*2+1);
   sendbuffer[i*2+1] = crc;
   BTLEserial.write(sendbuffer, i*2+2);
 }
