@@ -1,0 +1,3 @@
+[submodule "contrib/epoch"]
+	path = contrib/epoch
+	url = git@github.com:fastly/epoch.git
