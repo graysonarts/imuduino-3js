@@ -30,7 +30,7 @@ function render() {
 }
 
 var socket = io.connect()
-socket.on('position', function (data) {
+socket.on('pyr', function (data) {
   pitch = data.pitch
   yaw = -data.yaw
   roll = -data.roll

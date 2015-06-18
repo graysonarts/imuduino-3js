@@ -16,7 +16,7 @@ gulp.task('raw-app', [], function() {
           .pipe(gulp.dest('public'))
 })
 
-gulp.task('raw', ['raw-app'], function() {
+gulp.task('raw', ['raw-app', 'epoch'], function() {
   var manifest = gulp.src('./public/raw-manifest.json')
 
   return gulp.src('./client/raw.html')

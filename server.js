@@ -1,17 +1,4 @@
-var ble_package_name = './lib/imuduino',
-    record = false,
-    record_filename = process.env.npm_package_config_playback_file || 'imu.record'
-
-switch (process.env.npm_package_config_mode) {
-  case 'record':
-    console.log('running in record mode')
-    record = true
-    break
-  case 'playback':
-    console.log('running with playback: ' + record_filename)
-    ble_package_name = './lib/playback_imuduino'
-    break
-}
+var ble_package_name = './lib/imuduino'
 
 var express = require('express'),
     app = express(),
@@ -19,7 +6,6 @@ var express = require('express'),
     io = require('socket.io')(server),
     ble = require(ble_package_name),
     _ = require('lodash'),
-    fs = require('fs'),
     connection = null,
     radianScale = (Math.PI / 180.0)
 
@@ -29,24 +15,20 @@ console.log('server url http://localhost:' + 4200)
 
 app.use(express.static('public'))
 
-if (record) {
-  if (fs.existsSync(record_filename)) {
-    fs.renameSync(record_filename, record_filename + '.old')
-  }
-}
 
 function degreeToRadians(n) {
+  if (isNaN(n)) {
+    return n
+  }
   return n * radianScale
 }
 
 var IMUduino = new ble()
 IMUduino.on('packet', function (p) {
   p = _.mapValues(p, degreeToRadians)
-  if (record) {
-    p.duration = (new Date().getTime()) - start
-    fs.appendFileSync(record_filename, JSON.stringify(p) + '\n')
-  }
-  io.emit('position', p)
+  p.time = new Date().getTime()
+  p.duration = (new Date().getTime()) - start
+  io.emit(p.type || 'unknown', p)
   start = new Date().getTime() // Times are deltas
 })
 

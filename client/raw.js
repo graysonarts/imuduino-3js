@@ -1,39 +1,36 @@
 /* jshint browserify: true */
+/* jshint jquery: true */
+/* jshint unused: false */
 /* global io */
-var three = require('three'),
-    scene = new three.Scene(),
-    camera = new three.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000),
-    renderer = new three.WebGLRenderer(),
-    light = new three.DirectionalLight(0xffff00, 0.5),
-    pitch = 0,
-    yaw = 0,
-    roll = 0
+var d3 = require('d3')
+window.jQuery = require('jquery')
+require('../contrib/epoch/epoch.min.js')
 
-renderer.setSize( window.innerWidth, window.innerHeight)
-document.body.appendChild(renderer.domElement)
+var accelData = [
+  {
+    label: 'x',
+    values: [ { time: 0, y: 0 } ]
+  },
+  {
+    label: 'y',
+    values: [ { time: 0, y: 0 } ]
+  },
+  {
+    label: 'z',
+    values: [ { time: 0, y: 0 } ]
+  }
+]
 
-var geometry = new three.BoxGeometry(1, 1, 1),
-    material = new three.MeshLambertMaterial( { color: 0x00ff00 }),
-    cube = new three.Mesh(geometry, material)
-
-scene.add( cube )
-camera.position.z = 5
-light.position.set(0,1, 5)
-scene.add(light)
-
-function render() {
-  requestAnimationFrame( render )
-  cube.rotation.x = roll
-  cube.rotation.y = yaw
-  cube.rotation.z = pitch
-  renderer.render( scene, camera)
-}
+var accelChart = $('#accel').epoch({
+  type: 'time.line',
+  data: accelData
+})
 
 var socket = io.connect()
 socket.on('position', function (data) {
-  pitch = data.pitch
-  yaw = -data.yaw
-  roll = -data.roll
+  accelChart.push([
+    {time: data.time, y: data.accel_x},
+    {time: data.time, y: data.accel_y},
+    {time: data.time, y: data.accel_z}
+  ])
 })
-
-render()
