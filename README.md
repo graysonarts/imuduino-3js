@@ -24,7 +24,11 @@ npm install
 # Configure app to run the Yaw-Pitch-Roll section, see localhost:4200/ after starting the server.
 npm config set imuduino-3js:type IMUduino_Bluetooth_UART_YawPitchRoll
 
-# Start the server! See configuration notes below first.
+# Plug in your IMUduino board,
+# Upload sketch "IMUduino_Bluetooth_UART_YawPitchRoll",
+# Start the Arduino Serial Monitor!
+
+# Start the server. See configuration notes below first.
 npm start
 
 ```
