@@ -16,7 +16,8 @@
     "keypress": "^0.2.1",
     "lodash": "^3.9.3",
     "noble": "^1.0.1",
-    "socket.io": "^1.3.5"
+    "socket.io": "^1.3.5",
+    "three": "^0.71.0"
   },
   "devDependencies": {
     "d3": "^3.5.5",

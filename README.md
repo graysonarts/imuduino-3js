@@ -21,6 +21,9 @@ npm install -g browserify
 # Install local deps
 npm install
 
+# Run gulp 
+gulp
+
 # Configure app to run the Yaw-Pitch-Roll section, see localhost:4200/ after starting the server.
 npm config set imuduino-3js:type IMUduino_Bluetooth_UART_YawPitchRoll
 
